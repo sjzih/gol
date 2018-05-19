@@ -1,0 +1,73 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ANSI_BLUE	./src\main.c	15;"	d	file:
+ANSI_GREEN	./src\main.c	14;"	d	file:
+ANSI_GREEN	./src\main.c	20;"	d	file:
+ANSI_ORANGE	./src\main.c	16;"	d	file:
+ANSI_RED	./src\main.c	17;"	d	file:
+ANSI_RED	./src\main.c	21;"	d	file:
+ANSI_RESET	./src\main.c	18;"	d	file:
+ANSI_RESET	./src\main.c	22;"	d	file:
+DEFAULT_SETTINGS	./src\main.c	/^struct gol_settings DEFAULT_SETTINGS = {$/;"	v	typeref:struct:gol_settings
+DIE	./src\main.c	38;"	d	file:
+FPS	./src\main.c	154;"	d	file:
+FRAME_DT	./src\main.c	155;"	d	file:
+GOL_H_	./src\gol.h	2;"	d
+GOL_State	./src\gol.h	/^typedef struct gol_state *GOL_State;$/;"	t	typeref:struct:gol_state
+GUI_H_	./src\gui\gui.h	2;"	d
+GUI_Window	./src\gui\gui.h	/^typedef void *GUI_Window;$/;"	t
+HANDLE_ARG	./src\main.c	109;"	d	file:
+LOG_ERROR	./src\main.c	/^    LOG_ERROR,$/;"	e	enum:__anon1	file:
+LOG_INFO	./src\main.c	/^    LOG_INFO,$/;"	e	enum:__anon1	file:
+LOG_WARNING	./src\main.c	/^    LOG_WARNING,$/;"	e	enum:__anon1	file:
+MAINWND_CLASS	./src\gui\win_mainwnd.h	4;"	d
+NAME	./src\main.c	25;"	d	file:
+TEXTURE_HEIGHT	./src\video.c	6;"	d	file:
+TEXTURE_WIDTH	./src\video.c	5;"	d	file:
+VIDEO_H_	./src\video.h	2;"	d
+WIN32_LEAN_AND_MEAN	./src\gui\gui_win.c	1;"	d	file:
+WIN32_LEAN_AND_MEAN	./src\gui\win_mainwnd.c	1;"	d	file:
+WIN_HEIGHT	./src\gui\gui_win.c	10;"	d	file:
+WIN_MAINWND_H_	./src\gui\win_mainwnd.h	2;"	d
+WIN_STYLE	./src\gui\gui_win.c	11;"	d	file:
+WIN_WIDTH	./src\gui\gui_win.c	9;"	d	file:
+filename	./src\main.c	/^    const char *filename;$/;"	m	struct:gol_settings	file:
+framebuffer	./src\video.c	/^static Uint32 *framebuffer;$/;"	v	file:
+get_error_msg	./src\main.c	/^get_error_msg(void)$/;"	f	file:
+gol_context	./src\main.c	/^struct gol_context {$/;"	s	file:
+gol_errno	./src\main.c	/^static int gol_errno;$/;"	v	file:
+gol_errorstr	./src\main.c	/^static char gol_errorstr[80];$/;"	v	file:
+gol_init	./src\main.c	/^gol_init(GOL_State state, unsigned w, unsigned h)$/;"	f	file:
+gol_main_loop	./src\main.c	/^gol_main_loop(GOL_State state)$/;"	f	file:
+gol_settings	./src\main.c	/^struct gol_settings {$/;"	s	file:
+gol_state	./src\gol.h	/^struct gol_state {$/;"	s
+grid	./src\gol.h	/^    uint8_t *grid;$/;"	m	struct:gol_state
+gui_handle_events	./src\gui\gui_win.c	/^gui_handle_events(void)$/;"	f
+gui_init	./src\gui\gui_win.c	/^gui_init(void)$/;"	f
+height	./src\gol.h	/^    unsigned width, height;$/;"	m	struct:gol_state
+height	./src\main.c	/^    unsigned height, width;$/;"	m	struct:gol_settings	file:
+height	./src\main.c	/^    unsigned width, height;$/;"	m	struct:gol_context	file:
+hinst_g	./src\gui\gui_win.c	/^static HINSTANCE hinst_g;$/;"	v	file:
+log_printf	./src\main.c	/^log_printf(int type, const char *fmt, ...)$/;"	f	file:
+main	./src\main.c	/^int main(int argc, char *argv[])$/;"	f
+main	./src\opencl.c	/^int main(int argc, char *argv[])$/;"	f
+mainwnd_oncreate	./src\gui\win_mainwnd.c	/^mainwnd_oncreate(HWND hwnd, LPCREATESTRUCT lpcreate)$/;"	f	file:
+mainwnd_onsize	./src\gui\win_mainwnd.c	/^mainwnd_onsize(HWND hwnd, int type, int width, int height)$/;"	f	file:
+mainwnd_proc	./src\gui\win_mainwnd.c	/^mainwnd_proc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)$/;"	f	file:
+mainwnd_register	./src\gui\win_mainwnd.c	/^mainwnd_register(HINSTANCE hinst)$/;"	f
+niter	./src\main.c	/^    unsigned niter;$/;"	m	struct:gol_settings	file:
+nogui	./src\main.c	/^    bool nogui;$/;"	m	struct:gol_settings	file:
+parse_args	./src\main.c	/^parse_args(struct gol_settings *settings, int argc, char *argv[])$/;"	f	file:
+renderer_g	./src\video.c	/^static SDL_Renderer *renderer_g;$/;"	v	file:
+texture_g	./src\video.c	/^static SDL_Texture *texture_g;$/;"	v	file:
+usage_fmt	./src\main.c	/^static const char usage_fmt[] = $/;"	v	file:
+video_init	./src\video.c	/^video_init(GUI_Window ctx)$/;"	f
+video_render	./src\video.c	/^video_render(GOL_State state)$/;"	f
+width	./src\gol.h	/^    unsigned width, height;$/;"	m	struct:gol_state
+width	./src\main.c	/^    unsigned height, width;$/;"	m	struct:gol_settings	file:
+width	./src\main.c	/^    unsigned width, height;$/;"	m	struct:gol_context	file:
+window_g	./src\video.c	/^static SDL_Window *window_g;$/;"	v	file:

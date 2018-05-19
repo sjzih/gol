@@ -1,0 +1,8 @@
+#ifndef FEATURES_H_
+#define FEATURES_H_
+
+#cmakedefine USE_ANSI
+
+
+
+#endif

@@ -1,0 +1,50 @@
+######## PROJECT FILES ########
+TARGET  ::= golsim.exe
+SRC_DIR ::= ./src
+OBJ_DIR ::= ./obj
+SRC 	::= main.c gui/gui_win.c gui/win_mainwnd.c video.c
+
+VPATH ::= $(SRC_DIR) $(RES_DIR)
+OBJ ::=  $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC)))
+######## BUILD OPTIONS ########
+CC ?= gcc
+CTAGS   ::= ctags
+CFLAGS  ::= -std=c11 -Wpedantic -Wall -Wextra \
+	-Wno-unused-variable -Wno-unused-parameter\
+	-Wno-implicit-fallthrough -Wno-missing-field-initializers\
+	-Wno-unused-function -I$(SRC_DIR) -mconsole
+LDFLAGS ::= -fwhole-program
+LIBS    ::= `pkg-config --libs --cflags sdl2`
+########    TARGETS     ########
+.PHONY: all debug test clean tags
+### ALL ###
+all: CFLAGS += -O2 -march=native -Werror -s
+all: LDFLAGS+=
+all: $(TARGET) tags
+
+$(TARGET): $(OBJ) $(RES_OBJ)
+	$(CC) $(CFLAGS) $^ -o "$@" $(LDFLAGS) $(LIBS)
+
+define OBJ_TEMPLATE =
+$$(OBJ_DIR)/$(patsubst %.c,%.o, $(notdir $(1))): $(1) Makefile | $$(OBJ_DIR)
+	$$(CC) $$(CFLAGS) -c -o $$@ $$<
+endef
+
+$(foreach src, $(SRC), $(eval $(call OBJ_TEMPLATE, $(src))))
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+### TAGS ###
+tags: $(SRC)
+	$(CTAGS) -R $(SRC_DIR)
+
+### DEBUG ###
+debug: CFLAGS += -Og -g -DT_DEBUG
+debug: clean $(TARGET)
+
+### TEST ###
+
+clean: 
+	rm -rf $(OBJ_DIR)
+	rm -f $(TARGET)
