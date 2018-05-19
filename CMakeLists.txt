@@ -22,5 +22,10 @@ option (USE_ANSI "Use ANSI color codes" ON)
 configure_file ("${PROJECT_SOURCE_DIR}/features.h.in" "${PROJECT_BINARY_DIR}/features.h")
 
 add_executable (${TARGET} ${SRC})
-target_link_libraries (${TARGET} ${SDL2_LIBRARIES})
 set_property (TARGET ${TARGET} PROPERTY C_STANDARD 11)
+
+if (WIN32)
+    target_link_libraries (${TARGET} comctl32)
+endif()
+
+target_link_libraries (${TARGET} ${SDL2_LIBRARIES})
