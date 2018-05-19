@@ -5,8 +5,9 @@
 #define DEFAULT_WINH 480
 
 typedef void *GUI_Window;
+extern GUI_Window VIDEO_WINDOW;
 
-extern GUI_Window gui_init(void);
+extern int gui_init(void);
 extern int gui_handle_events(void);
 
 #endif

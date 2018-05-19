@@ -6,17 +6,17 @@
 #include "gui.h"
 #include "win32_mainwindow.h"
 
-#define WIN_STYLE (WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME)
+#define WIN_STYLE (WS_OVERLAPPEDWINDOW)
 
 static HINSTANCE hinst_g;
 
-extern GUI_Window
+extern int
 gui_init(void)
 {
     hinst_g = GetModuleHandle(NULL);
 
     if (!mainwnd_register(hinst_g))
-        return NULL;
+        return -1;
 
     HWND hwnd = CreateWindowEx(
             0,
@@ -33,11 +33,11 @@ gui_init(void)
             NULL
     );
     if (!hwnd)
-        return NULL;
+        return -1;
 
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
-    return hwnd;
+    return 0;
 }
 
 extern int

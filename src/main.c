@@ -86,6 +86,15 @@ enum {
     LOG_ERROR,
 };
 
+static void 
+draw_grid(Uint32 t)
+{
+    for (int i=0; i<1024; i++)
+        for (int j=0; j<768; j++)
+            framebuffer[i*768 + j] = (i+t) << 8;
+}
+
+
 static void
 log_printf(int type, const char *fmt, ...)
 {
@@ -104,9 +113,10 @@ log_printf(int type, const char *fmt, ...)
 
     if (type != LOG_INFO) {
         if (len && fmt[len-1] == ':') {
-            fprintf(stderr, " %s\n", get_error_msg());
+            fprintf(stderr, " %s", get_error_msg());
         }
     }
+    fputc('\n', stderr);
 }
 
 #define HANDLE_ARG(shortn, longn, var, hasarg) \
@@ -162,23 +172,28 @@ main_loop(GOL_State state)
 {
     int running = true;
     Uint32 t0, t1, dt = 0;
+    SDL_Event event;
 
     while (running) {
-
         t0 = SDL_GetTicks();
         {
-            int event = gui_handle_events();
+            gui_handle_events();
+            while (SDL_PollEvent(&event)) {
+                if (event.type == SDL_QUIT)
+                    running = false;
+            }
 
+            draw_grid(t0);
 
             video_render(state);
         }
         t1 = SDL_GetTicks();
 
         dt = t1 - t0;
-        log_printf(LOG_INFO, "%ums\n", dt);
         if (dt > FRAME_DT)
-            continue;
-        SDL_Delay(FRAME_DT - dt);
+            log_printf(LOG_WARNING, "video output can't keep up: %ums/frame", dt);
+        if (dt < FRAME_DT)
+            SDL_Delay(FRAME_DT - dt);
     }
 }
 
@@ -204,16 +219,15 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    GUI_Window wnd = NULL;
-
     if (!settings.nogui) {
-        wnd = gui_init();
-        if (wnd == NULL)
+        if (gui_init() < 0) {
             log_printf(LOG_ERROR, "failed to initialize GUI");
+            log_printf(LOG_INFO,  "falling back to CLI");
+        }
     }
 
-    //if (video_init(wnd) < 0)
-    //    log_printf(LOG_ERROR, "failed to initialized video:");
+    if (video_init(VIDEO_WINDOW) < 0)
+        log_printf(LOG_ERROR, "failed to initialized video:");
 
     gol_init(&state, settings.width, settings.height);
 

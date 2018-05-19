@@ -8,7 +8,7 @@
 static SDL_Window *window_g;
 static SDL_Renderer *renderer_g;
 static SDL_Texture *texture_g;
-static Uint32 *framebuffer;
+Uint32 *framebuffer;
 
 extern int
 video_init(GUI_Window ctx)
@@ -23,12 +23,12 @@ video_init(GUI_Window ctx)
     if (window_g == NULL)
         return -1;
 
-    renderer_g = SDL_CreateRenderer(window_g, -1, SDL_RENDERER_ACCELERATED);
+    renderer_g = SDL_CreateRenderer(window_g, -1, SDL_RENDERER_SOFTWARE);
     if (renderer_g == NULL)
         return -1;
 
     texture_g = SDL_CreateTexture(renderer_g, 
-                    SDL_PIXELFORMAT_RGBA4444,
+                    SDL_PIXELFORMAT_RGBA8888,
                     SDL_TEXTUREACCESS_STREAMING,
                     TEXTURE_WIDTH, TEXTURE_HEIGHT);
     if (!texture_g)
@@ -44,8 +44,6 @@ video_init(GUI_Window ctx)
 extern void
 video_render(GOL_State state)
 {
-    //unsigned w = state->width, h = state->height;
-
     SDL_UpdateTexture(texture_g, NULL, framebuffer, sizeof(Uint32 [TEXTURE_WIDTH]));
     SDL_RenderCopy(renderer_g, texture_g, NULL, NULL);
     SDL_RenderPresent(renderer_g);
