@@ -17,6 +17,7 @@ static HWND hbutton_g;
 static HWND htext_g;
 static HWND hedit_g;
 static HWND hvideo_g;
+static HWND hedit_g;
 
 GUI_Window VIDEO_WINDOW;
 
@@ -74,6 +75,13 @@ mainwnd_oncreate(HWND hwnd, LPCREATESTRUCT lpcreate)
             0, 0, TEXT_NITER_WIDTH, TEXT_NITER_HEIGHT,
             hwnd, NULL, NULL, NULL
     );
+    hedit_g = CreateWindowEx(
+            ES_NUMBER,
+            _T("EDIT"), _T(""),
+            WS_VISIBLE | WS_CHILD,
+            0, 0, 0, BTN_GO_HEIGHT,
+            hwnd, NULL, NULL, NULL
+    );
     hvideo_g = CreateWindow(
             _T("STATIC"), _T(""),
             WS_BORDER | WS_VISIBLE | WS_CHILD,  // Styles 
@@ -90,7 +98,12 @@ mainwnd_onsize(HWND hwnd, int type, int width, int height)
     x = width - BTN_GO_WIDTH - PADDING, y = height - BTN_GO_HEIGHT - PADDING, h = 0, w = 0;
     SetWindowPos(hbutton_g, HWND_TOP, x, y, w, h, SWP_NOSIZE);
 
-    x -= TEXT_NITER_WIDTH, y -= BTN_GO_HEIGHT;
+    x -= TEXT_NITER_WIDTH;
+    w  = width - x - BTN_GO_WIDTH;
+    h = BTN_GO_HEIGHT;
+    SetWindowPos(hedit_g, HWND_TOP, x, y, w, h, 0);
+
+    y -= BTN_GO_HEIGHT;
     SetWindowPos(htext_g, HWND_TOP, x, y, w, h, SWP_NOSIZE);
 
     w = x - 2*PADDING;

@@ -14,6 +14,7 @@ extern int
 gui_init(void)
 {
     hinst_g = GetModuleHandle(NULL);
+    InitCommonControls();
 
     if (!mainwnd_register(hinst_g))
         return -1;

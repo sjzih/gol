@@ -5,7 +5,7 @@ set(TARGET golsim)
 
 find_package (SDL2 REQUIRED)
 
-set (SRCDIR "${PROJECT_SOURCE_DIR}/src")
+set (SRCDIR "src")
 
 set (SRC ${SRCDIR}/main.c)
 list (APPEND SRC "${SRCDIR}/video.c")
@@ -20,6 +20,13 @@ set (CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-s -mconsole")
 option (USE_ANSI "Use ANSI color codes" ON)
 
 configure_file ("${PROJECT_SOURCE_DIR}/features.h.in" "${PROJECT_BINARY_DIR}/features.h")
+
+if  (WIN32)
+    enable_language (RC)
+    list (APPEND SRC "res/resource.rc")
+endif()
+
+message (${SRC})
 
 add_executable (${TARGET} ${SRC})
 set_property (TARGET ${TARGET} PROPERTY C_STANDARD 11)
